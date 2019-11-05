@@ -1,0 +1,29 @@
+INFO http-nio-8081-exec-3 com.controllers.HomeController - Hello endpoint : test bla
+INFO http-nio-8081-exec-3 com.controllers.HomeController - Hello endpoint : dsad sdada
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : null
+INFO http-nio-8081-exec-2 com.controllers.HomeController - Hello endpoint : null
+INFO http-nio-8081-exec-1 com.controllers.HomeController - Hello endpoint : null
+INFO http-nio-8081-exec-2 com.controllers.HomeController - Hello endpoint : CREATE,READ,DELETE,EDIT,PARTICIPATE
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-5 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-2 com.security.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-2 com.security.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-9 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-10 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-1 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-8 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
+INFO http-nio-8081-exec-7 com.controllers.HomeController - Hello endpoint : somuse 12312
+INFO http-nio-8081-exec-5 com.controllers.HomeController - Hello endpoint : ADMIN,PROJECT_OWNER
