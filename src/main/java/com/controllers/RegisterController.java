@@ -1,7 +1,7 @@
 package com.controllers;
 
 import com.database.AccountRepository;
-import com.model.Account;
+import com.entities.Account;
 import com.response.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,11 @@ public class RegisterController {
 
     @PostMapping
     ResponseEntity<ErrorResponse> registerAccount(@RequestBody Account account){
-        if(accountRepository.findFirstByUsername(account.getUsername()) != null ){
-            return new ResponseEntity<>(ErrorResponse.errorResponseWithExistingAccount("username"),HttpStatus.BAD_REQUEST);
+        if(accountRepository.findFirstByUsername(account.getUsername()).isPresent()){
+            return new ResponseEntity<>(ErrorResponse.errorResponseWithExistingField("username"),HttpStatus.BAD_REQUEST);
         }
-        if(accountRepository.findFirstByEmail(account.getEmail()) != null){
-            return new ResponseEntity<>(ErrorResponse.errorResponseWithExistingAccount("email"),HttpStatus.BAD_REQUEST);
+        if(accountRepository.findFirstByEmail(account.getEmail()).isPresent()){
+            return new ResponseEntity<>(ErrorResponse.errorResponseWithExistingField("email"),HttpStatus.BAD_REQUEST);
         }
 
         accountRepository.save(account);

@@ -38,15 +38,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                // add jwt filters (1. authentication, 2. authorization)
+                // add jwt jsonFilters (1. authentication, 2. authorization)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(),this.accountRepository))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.accountRepository))
                 .authorizeRequests()
                 // configure access rules
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/register").permitAll()
-                .antMatchers(HttpMethod.GET, "/hello/2")
-                .hasAnyRole("ADMIN","PROJECT_OWNER")
+                .antMatchers(HttpMethod.POST, "/projects")
+                .hasAnyRole(Authorities.ADMIN,Authorities.PROJECT_OWNER)
+//                .antMatchers(HttpMethod.POST, "/projects/{ownerName}")
+//                .hasAnyRole("ADMIN","PROJECT_OWNER")
+
 //                .antMatchers("/api/public/management/*").hasRole("MANAGER")
 //                .antMatchers("/api/public/admin/*").hasRole("ADMIN")
                 .anyRequest().authenticated();
@@ -61,14 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
-//    @Bean
-//    PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//@Bean
-//public static NoOpPasswordEncoder passwordEncoder() {
-//    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-//}
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

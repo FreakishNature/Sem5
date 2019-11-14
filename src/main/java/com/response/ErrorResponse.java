@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ErrorResponse {
     String error;
-    public static ErrorResponse errorResponseWithExistingAccount(String field){
+
+    public static ErrorResponse errorResponseWithExistingField(String field){
         return new ErrorResponse("There exists user with such " + field);
     }
 
@@ -17,5 +18,10 @@ public class ErrorResponse {
 
     public static ErrorResponse errorResponseNoSuchUsername(String username){
         return new ErrorResponse("There is no user with username: \"" + username + "\"");
+    }
+
+    public static ErrorResponse projectDoesNotExists(String projectName){
+        return new ErrorResponse("The project " + projectName + " was not found.");
+
     }
 }

@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.model.User;
+import com.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class Login {
     @PostMapping
-    ResponseEntity login(@RequestBody User user){
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+    ResponseEntity<ErrorResponse> login(@RequestBody User user){
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

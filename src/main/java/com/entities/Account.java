@@ -1,10 +1,12 @@
-package com.model;
+package com.entities;
 
 
 import com.security.Authorities;
 import com.security.converters.CryptoConverterAes;
 import com.security.converters.CryptoConverterShaRsa;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "Accounts")
 @Getter
+@NoArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -31,7 +34,15 @@ public class Account {
     @Convert(converter = CryptoConverterAes.class)
     private String email;
 
+    @Setter
     private String role; // ProjectOwner, ProjectMember ,Investor, Moderator, Admin
+
+    public Account(String username, String password, String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
     public static List<String> getAuthoritiesForRole(String role) throws IOException {
         switch (role){

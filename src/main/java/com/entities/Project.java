@@ -1,5 +1,7 @@
-package com.model;
+package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.model.Status;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,11 +23,21 @@ public class Project {
     private String name;
     private String description;
     private String owner;
-    private int investedSum;
+    private double investedSum;
+    private double targetSum;
 
-    public Project(String name,String description,String owner){
+    private String creationDate;
+    private String targetDate;
+
+    private String status = Status.PENDING;
+
+    public Project(String name,String description,double targetSum){
         this.name = name;
         this.description = description;
-        this.owner = owner;
+        this.targetSum = targetSum;
+    }
+
+    public void invest(double investedSum){
+        this.investedSum += investedSum;
     }
 }

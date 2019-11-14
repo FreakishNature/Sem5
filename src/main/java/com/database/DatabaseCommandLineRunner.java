@@ -1,8 +1,7 @@
 package com.database;
 
-import com.model.Project;
+import com.entities.Account;
 import com.security.Authorities;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -32,15 +31,26 @@ public class DatabaseCommandLineRunner implements CommandLineRunner {
         this.projectMembersRepository = projectMembersRepository;
     }
 
-
-
     @Override
     public void run(String... args) throws Exception {
-        projectRepository.save(new Project("proj","my descr","owner"));
         Authorities.ADMIN = ADMIN;
         Authorities.INVESTOR = INVESTOR;
         Authorities.MODERATOR = MODERATOR;
         Authorities.PROJECT_MEMBER = PROJECT_MEMBER;
         Authorities.PROJECT_OWNER = PROJECT_OWNER;
+
+        accountRepository.save(new Account(
+                "admin",
+                "admin",
+                "admin@mail.com",
+                ADMIN
+        ));
+
+        accountRepository.save(new Account(
+                "user",
+                "user",
+                "admin@mail.com",
+                PROJECT_MEMBER
+        ));
     }
 }
