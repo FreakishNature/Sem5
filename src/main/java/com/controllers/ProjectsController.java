@@ -6,9 +6,13 @@ import com.database.ProjectRepository;
 import com.entities.Account;
 import com.entities.Project;
 import com.entities.ProjectMember;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.*;
 import com.response.ErrorResponse;
 import com.security.Authorities;
+import com.utils.JsonUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +24,12 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+// Create validations for all request bodies and set all fields which should not be putted to null
 @RequestMapping("/projects")
 @RestController
 public class ProjectsController {
+    private static Logger log = Logger.getLogger(ProjectsController.class);
+
     private final
     ProjectRepository projectRepository;
 
@@ -42,124 +49,256 @@ public class ProjectsController {
     }
 
 
+    /*
+           This is endpoint is used to create new projects.
+
+           * Project can not be created if there exists projects with identical name,
+           should be returned 409 status code.
+
+           * The owner of this project will become user who is logged in using auth token.
+
+           * After project creation its status becomes PENDING and it could be updated only
+           by moderators or admin.
+
+           * After project creation should be set creation date.
+
+     */
+
     @PostMapping
     ResponseEntity createProject(Authentication authentication, @RequestBody Project project) {
+        callingEndpointLog("POST /projects endpoint with request body : " + JsonUtils.toJsonString(project));
+
         String username = authentication.getPrincipal().toString();
 
         if(projectRepository.findByName(project.getName()).isPresent()){
-            return errorIfProjectNotFound(project.getName());
+            log.debug("Project with name : " + project.getName() + " already exists.");
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("Project with name " + project.getName() + " already exists."),
+                            HttpStatus.CONFLICT
+                    )
+            );
         }
 
         project.setOwner(username);
-        project.setCreationDate(dateFormat.format(new Date()));
         projectRepository.save(project);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return responseWithLogs(new ResponseEntity<>(HttpStatus.CREATED));
     }
 
-    @PatchMapping("/{projectName}/updateStatus")
-    private ResponseEntity<ErrorResponse> updateProjectStatus(
+    /*
+        This endpoint is used to update project status after its creation.
+
+        * Only MODERATOR and ADMIN should be able to access this endpoint.
+
+        * If project was not found should be returned 404.
+
+        * After changing the status of the project from PENDING to ACCEPTED should be
+        set creation time.
+
+        * Project can not be set to PENDING status. Should be returned 400.
+
+     */
+    @PatchMapping("/{projectName}/status")
+    private ResponseEntity updateProjectStatus(
             @PathVariable String projectName,
             @RequestParam Optional<String> status){
+        callingEndpointLog("PATCH /projects/" + projectName + "/status?status=" + status + " endpoint.");
+
         if(!status.isPresent()){
-            return new ResponseEntity<>(
-                    new ErrorResponse("Required request parameter status is missing"),
-                    HttpStatus.BAD_REQUEST
+            log.debug("Required request parameter status is missing");
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("Required request parameter status is missing"),
+                            HttpStatus.BAD_REQUEST
+                    )
+            );
+        }
+
+        if(status.get().equals(Status.PENDING)){
+            log.debug("Project can not be set to " + Status.PENDING + " status.");
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("Project can not be set to " + Status.PENDING + " status."),
+                            HttpStatus.BAD_REQUEST
+                    )
             );
         }
 
         Optional<Project> project = projectRepository.findByName(projectName);
 
         if(!project.isPresent()){
-            return errorIfProjectNotFound(projectName);
+            return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
         project.get().setStatus(status.get());
-        projectRepository.save(project.get());
 
+        if(project.get().getCreationDate().equals("") && status.get().equals(Status.ACCEPTED)){
+            project.get().setCreationDate(dateFormat.format(new Date()));
+        }
+
+        projectRepository.save(project.get());
+        log.debug("Project " + projectName + " status has been updated.");
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
+    /*
+        Getting data about single project.
+
+        * If requested by MODERATOR or ADMIN or OWNER of this PROJECT
+        data should be returned with status.
+
+        * If project was not found should be returned 404
+     */
 
     @GetMapping("/{projectName}")
-    ResponseEntity getProjectByName(@PathVariable String projectName){
+    ResponseEntity getProjectByName(
+            Authentication auth,
+            @PathVariable String projectName){
+        callingEndpointLog("GET /projects/" + projectName + " endpoint");
+        String username = auth.getPrincipal().toString();
+        Optional<Account> account = accountRepository.findFirstByUsername(username);
         Optional<Project> project = projectRepository.findByName(projectName);
 
-        return project.<ResponseEntity>map(p ->
-                new ResponseEntity<>(new ProjectData(p), HttpStatus.OK)
-                ).orElseGet(() -> errorIfProjectNotFound(projectName)
-        );
+        if (!project.isPresent()){
+            return responseWithLogs(errorIfProjectNotFound(projectName));
+        }
 
+        if(account.get().getRole().equals(Authorities.ADMIN) ||
+           account.get().getRole().equals(Authorities.MODERATOR) ||
+           account.get().getUsername().equals(project.get().getOwner())){
+
+            return responseWithLogs(new ResponseEntity<>(project.get(), HttpStatus.OK));
+        }
+
+        return responseWithLogs(new ResponseEntity<>(new ProjectData(project.get()), HttpStatus.OK));
     }
 
+    /*
+        Delete single project.
+
+        * Allowed only to ADMIN and OWNER of this PROJECT.
+
+        * If project was not found should be returned 404
+
+        * If project has invested sum it can be deleted only by ADMIN should be returned 403
+     */
+
     @DeleteMapping("/{projectName}")
-    ResponseEntity deleteProjectByName(@PathVariable String projectName){
+    ResponseEntity deleteProjectByName(
+            Authentication auth,
+            @PathVariable String projectName){
+        callingEndpointLog("DELETE /projects/" + projectName);
+        String username = auth.getPrincipal().toString();
+        Account account = accountRepository.findFirstByUsername(username).get();
         Optional<Project> project = projectRepository.findByName(projectName);
 
         if(!project.isPresent()){
-            return errorIfProjectNotFound(projectName);
+            return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
-        if(project.get().getInvestedSum() > 0){
-            return new ResponseEntity<>(
-                    new ErrorResponse("You can not delete project which has invested sum"),
-                    HttpStatus.BAD_REQUEST
+        if(project.get().getInvestedSum() > 0 && !account.getRole().equals(Authorities.ADMIN)){
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("You can not delete project which has invested sum"),
+                            HttpStatus.FORBIDDEN
+                    )
             );
         }
 
         projectRepository.delete(project.get());
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return responseWithLogs(new ResponseEntity<>(HttpStatus.ACCEPTED));
     }
 
 
+        /*
+        Getting all project.
+        We can specify status of projects which we are looking for,
+        this functionality is available only for ADMIN and MODERATOR
+
+        If status does not exists should be returned for ADMIN and MODERATOR 400.
+
+        OTHER users should receive response without status field.
+
+
+     */
     @GetMapping
     ResponseEntity getAllProjects(Authentication auth,
                                  @RequestParam(required = false) Optional<String> status){
+        callingEndpointLog("GET /projects?status=" + status);
         String username = auth.getPrincipal().toString();
         Optional<Account> account = accountRepository.findFirstByUsername(username);
 
         if(account.get().getRole().equals(Authorities.ADMIN) ||
-                account.get().getRole().equals(Authorities.MODERATOR)){
+            account.get().getRole().equals(Authorities.MODERATOR)){
 
             if(status.isPresent()){
                 if(!Status.ALLOWED_STATUSES.contains(status.get())){
-                    return noSuchStatusError(status.get());
+                    return responseWithLogs(noSuchStatusError(status.get()));
                 }
 
-                return new ResponseEntity<>(
-                        projectRepository.findAllByStatus(status.get()),
-                        HttpStatus.OK
+                return responseWithLogs(
+                        new ResponseEntity<>(
+                                projectRepository.findAllByStatus(status.get()),
+                                HttpStatus.OK
+                        )
                 );
             }
 
 
-            return new ResponseEntity<>(
-                    projectRepository.findAll(),
-                    HttpStatus.OK
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            projectRepository.findAll(),
+                            HttpStatus.OK
+                    )
             );
         }
 
-        return new ResponseEntity<>(
-                projectRepository.findAll()
-                        .stream()
-                        .map(ProjectData::new)
-                        .collect(Collectors.toList()),
-                HttpStatus.OK
+        return responseWithLogs(
+                new ResponseEntity<>(
+                        projectRepository.findAll()
+                                .stream()
+                                .map(ProjectData::new)
+                                .collect(Collectors.toList()),
+                        HttpStatus.OK
+                )
         );
     }
+
+    /*
+        Getting all project for specified owner.
+        We can specify status of projects which we are looking for,
+        this functionality is available only for:
+        1) project owners
+        2) admin
+        3) moderators
+
+        Project owner can view status only of their projects.
+
+        Everyone else should get 403 response code while trying to access
+        this endpoint with specified status.
+
+        OTHER users should receive response without status field.
+
+        In case if owner does not exists should be returned 404 error.
+
+     */
 
     @GetMapping("/owners/{ownerName}")
     ResponseEntity getAllProjectsForOwner(Authentication auth,
                                           @PathVariable String ownerName,
                                           @RequestParam(required = false) Optional<String> status){
+        callingEndpointLog("GET /projects/owners/" + ownerName + "?status=" + status);
         String username = auth.getPrincipal().toString();
         Optional<Account> account = accountRepository.findFirstByUsername(ownerName);
 
         if(!account.isPresent()){
-            return new ResponseEntity<>(
-                    ErrorResponse.errorResponseNoSuchUsername(ownerName),
-                    HttpStatus.NOT_FOUND
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            ErrorResponse.errorResponseNoSuchUsername(ownerName),
+                            HttpStatus.NOT_FOUND
+                    )
             );
         }
         account = accountRepository.findFirstByUsername(username);
@@ -170,50 +309,89 @@ public class ProjectsController {
 
             if(status.isPresent()){
                 if(!Status.ALLOWED_STATUSES.contains(status.get())){
-                    return noSuchStatusError(status.get());
+                    return responseWithLogs(noSuchStatusError(status.get()));
                 }
 
-                return new ResponseEntity<>(
-                        projectRepository.findAllByOwnerAndStatus(ownerName,status.get()),
-                        HttpStatus.OK
+                return responseWithLogs(
+                        new ResponseEntity<>(
+                                projectRepository.findAllByOwnerAndStatus(ownerName,status.get()),
+                                HttpStatus.OK
+                        )
                 );
             }
 
 
-            return new ResponseEntity<>(
-                    projectRepository.findAllByOwner(ownerName),
-                    HttpStatus.OK
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            projectRepository.findAllByOwner(ownerName),
+                            HttpStatus.OK
+                    )
             );
         }
 
         if(status.isPresent()){
-            return new ResponseEntity<>(
-                    new ErrorResponse("You are not allowed to search by status not your projects."),
-                    HttpStatus.FORBIDDEN
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("You are not allowed to search by status foreign projects."),
+                            HttpStatus.FORBIDDEN
+                    )
             );
         }
 
-        return new ResponseEntity<>(
-                projectRepository.findAllByOwner(ownerName)
-                        .stream()
-                        .map(ProjectData::new)
-                        .collect(Collectors.toList()),
-                HttpStatus.OK
+        return responseWithLogs(
+                new ResponseEntity<>(
+                        projectRepository.findAllByOwner(ownerName)
+                                .stream()
+                                .map(ProjectData::new)
+                                .collect(Collectors.toList()),
+                        HttpStatus.OK
+                )
         );
     }
 
+    /*
+        This endpoint is used to update project name and description.
+
+        * If project does not exists should be returned 404
+
+        * Only OWNER of this PROJECT, MODERATOR, ADMIN can access this endpoint
+
+        * After updating project status should be changed to PENDING
+     */
+
     @PutMapping("/{projectName}")
-    ResponseEntity<ErrorResponse> updateProject(@PathVariable String projectName,@RequestBody Project project){
+    ResponseEntity updateProject(
+            Authentication auth,
+            @PathVariable String projectName,
+            @RequestBody Project project){
+        callingEndpointLog("PUT /projects/" + projectName + " request body " + JsonUtils.toJsonString(project));
+
+        String username = auth.getPrincipal().toString();
+        Account account = accountRepository.findFirstByUsername(username).get();
         Optional<Project> searchedProject = projectRepository.findByName(projectName);
 
         if(!searchedProject.isPresent()){
-            return errorIfProjectNotFound(projectName);
+            return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
         if(projectRepository.findByName(project.getName()).isPresent()){
-            return new ResponseEntity<>(
-                    ErrorResponse.errorResponseWithExistingField("project name"),
-                    HttpStatus.BAD_REQUEST
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            ErrorResponse.errorResponseWithExistingField("project name"),
+                            HttpStatus.BAD_REQUEST
+                    )
+            );
+        }
+
+        if(!account.getRole().equals(Authorities.ADMIN) &&
+            !account.getRole().equals(Authorities.MODERATOR) &&
+            !searchedProject.get().getOwner().equals(username)){
+
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("You do not have permissions to update this resource"),
+                            HttpStatus.FORBIDDEN
+                    )
             );
         }
 
@@ -223,24 +401,44 @@ public class ProjectsController {
 
         projectRepository.save(searchedProject.get());
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return responseWithLogs(
+                new ResponseEntity<>(HttpStatus.ACCEPTED)
+        );
     }
 
+    /*
+        This endpoint is used for investing to project.
+
+        * Investment could not be negative or 0.
+
+        * If project does not exists should be returned 404.
+
+        * If user was not member of invested project it should be added to the list as Investor
+         and if its role was PROJECT_MEMBER it should be changed to Investor.
+
+         * After investing should be added investment sum both to project and to member.
+
+     */
+
     @PatchMapping("/{projectName}")
-    ResponseEntity<ErrorResponse> patchProject(Authentication auth,
+    ResponseEntity patchProject(Authentication auth,
                                                @RequestParam double investingSum,
                                                @PathVariable String projectName){
+        callingEndpointLog("PATCH /projects/" + projectName + "?investingSum=" + investingSum);
+
         if(investingSum <= 0){
-            return new ResponseEntity<>(
-                    new ErrorResponse("You can not invest sum less or equal to 0"),
-                    HttpStatus.BAD_REQUEST
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("You can not invest sum less or equal to 0"),
+                            HttpStatus.BAD_REQUEST
+                    )
             );
         }
 
         Optional<Project> project = projectRepository.findByName(projectName);
 
         if(!project.isPresent()){
-            return errorIfProjectNotFound(projectName);
+            return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
         Optional<Account> account = accountRepository.findFirstByUsername(auth.getPrincipal().toString());
@@ -275,10 +473,11 @@ public class ProjectsController {
 
         }
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return responseWithLogs(new ResponseEntity<>(HttpStatus.ACCEPTED));
     }
 
     static ResponseEntity<ErrorResponse> errorIfProjectNotFound(String projectName){
+        log.info("Project with project name " + projectName + " does not exists.");
         return new ResponseEntity<>(
                     ErrorResponse.projectDoesNotExists(projectName),
                     HttpStatus.NOT_FOUND
@@ -293,5 +492,12 @@ public class ProjectsController {
         );
     }
 
+    private ResponseEntity responseWithLogs(ResponseEntity responseEntity){
+        log.info("Has been returned response : " + responseEntity);
+        return responseEntity;
+    }
 
+    private void callingEndpointLog(String endpoint){
+        log.info("Has been called endpoint " + endpoint);
+    }
 }

@@ -8,6 +8,7 @@ import com.model.User;
 import com.security.UserPrincipal;
 import com.response.ErrorResponse;
 import com.security.JwtProperties;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,7 @@ import java.util.Optional;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+    Logger log = Logger.getLogger(JwtAuthenticationFilter.class);
     AccountRepository accountRepository;
 
     private AuthenticationManager authenticationManager;
@@ -78,7 +80,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 return null;
         }
 
-
+        log.info("Trying to get token for user : " + user.getUsername());
         // Account not found
         if(!account.isPresent()) {
             errorResponse(response,"Invalid username or password.");
@@ -101,6 +103,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
                 .sign(HMAC512(JwtProperties.SECRET.getBytes()));
 
+        log.info("Token has been generated successfully");
+        log.debug("Generated token : " + token);
         // Add token in response
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " +  token);
     }
