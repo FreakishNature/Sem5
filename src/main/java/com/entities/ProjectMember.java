@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class ProjectMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Getter

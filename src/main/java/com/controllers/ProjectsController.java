@@ -6,8 +6,6 @@ import com.database.ProjectRepository;
 import com.entities.Account;
 import com.entities.Project;
 import com.entities.ProjectMember;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.*;
 import com.response.ErrorResponse;
 import com.security.Authorities;
@@ -25,6 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 // Create validations for all request bodies and set all fields which should not be putted to null
+
 @RequestMapping("/projects")
 @RestController
 public class ProjectsController {
@@ -133,7 +132,7 @@ public class ProjectsController {
 
         project.get().setStatus(status.get());
 
-        if(project.get().getCreationDate().equals("") && status.get().equals(Status.ACCEPTED)){
+        if(project.get().getCreationDate() == null && status.get().equals(Status.ACCEPTED)){
             project.get().setCreationDate(dateFormat.format(new Date()));
         }
 
@@ -156,19 +155,23 @@ public class ProjectsController {
             Authentication auth,
             @PathVariable String projectName){
         callingEndpointLog("GET /projects/" + projectName + " endpoint");
-        String username = auth.getPrincipal().toString();
-        Optional<Account> account = accountRepository.findFirstByUsername(username);
+
         Optional<Project> project = projectRepository.findByName(projectName);
 
         if (!project.isPresent()){
             return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
-        if(account.get().getRole().equals(Authorities.ADMIN) ||
-           account.get().getRole().equals(Authorities.MODERATOR) ||
-           account.get().getUsername().equals(project.get().getOwner())){
+        if(auth != null){
+            String username = auth.getPrincipal().toString();
 
-            return responseWithLogs(new ResponseEntity<>(project.get(), HttpStatus.OK));
+            Optional<Account> account = accountRepository.findFirstByUsername(username);
+            if(account.get().getRole().equals(Authorities.ADMIN) ||
+                account.get().getRole().equals(Authorities.MODERATOR) ||
+                account.get().getUsername().equals(project.get().getOwner())){
+
+                return responseWithLogs(new ResponseEntity<>(project.get(), HttpStatus.OK));
+            }
         }
 
         return responseWithLogs(new ResponseEntity<>(new ProjectData(project.get()), HttpStatus.OK));
@@ -227,38 +230,42 @@ public class ProjectsController {
     ResponseEntity getAllProjects(Authentication auth,
                                  @RequestParam(required = false) Optional<String> status){
         callingEndpointLog("GET /projects?status=" + status);
-        String username = auth.getPrincipal().toString();
+
+        String username = auth != null ? auth.getPrincipal().toString() : "";
+
         Optional<Account> account = accountRepository.findFirstByUsername(username);
+        if(account.isPresent()){
+            if(account.get().getRole().equals(Authorities.ADMIN) ||
+                    account.get().getRole().equals(Authorities.MODERATOR)){
 
-        if(account.get().getRole().equals(Authorities.ADMIN) ||
-            account.get().getRole().equals(Authorities.MODERATOR)){
+                if(status.isPresent()){
+                    if(!Status.ALLOWED_STATUSES.contains(status.get())){
+                        return responseWithLogs(noSuchStatusError(status.get()));
+                    }
 
-            if(status.isPresent()){
-                if(!Status.ALLOWED_STATUSES.contains(status.get())){
-                    return responseWithLogs(noSuchStatusError(status.get()));
+                    return responseWithLogs(
+                            new ResponseEntity<>(
+                                    projectRepository.findAllByStatus(status.get()),
+                                    HttpStatus.OK
+                            )
+                    );
                 }
+
 
                 return responseWithLogs(
                         new ResponseEntity<>(
-                                projectRepository.findAllByStatus(status.get()),
+                                projectRepository.findAll(),
                                 HttpStatus.OK
                         )
                 );
             }
-
-
-            return responseWithLogs(
-                    new ResponseEntity<>(
-                            projectRepository.findAll(),
-                            HttpStatus.OK
-                    )
-            );
         }
 
         return responseWithLogs(
                 new ResponseEntity<>(
                         projectRepository.findAll()
                                 .stream()
+                                .filter(p -> p.getStatus().equals(Status.ACCEPTED))
                                 .map(ProjectData::new)
                                 .collect(Collectors.toList()),
                         HttpStatus.OK
@@ -441,6 +448,13 @@ public class ProjectsController {
             return responseWithLogs(errorIfProjectNotFound(projectName));
         }
 
+        if(!project.get().getStatus().equals(Status.ACCEPTED)){
+            return responseWithLogs(new ResponseEntity<>(
+                    new ErrorResponse("You can not invest to project which status is not active"),
+                    HttpStatus.FORBIDDEN
+            ));
+        }
+
         Optional<Account> account = accountRepository.findFirstByUsername(auth.getPrincipal().toString());
 
         project.get().invest(investingSum);
@@ -457,13 +471,15 @@ public class ProjectsController {
                     investingSum,
                     "Investor"
             );
-
         } else {
             projectMember = projectMemberOptional.get();
             projectMember.addInvestedSum(investingSum);
         }
 
         projectMember.setStatus(Status.ACCEPTED);
+
+        account.get().addInvestedSum(investingSum);
+        accountRepository.save(account.get());
         projectMembersRepository.save(projectMember);
 
 

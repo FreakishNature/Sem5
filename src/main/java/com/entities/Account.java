@@ -19,11 +19,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 512)
-    @Convert(converter = CryptoConverterAes.class)
+//    @Convert(converter = CryptoConverterAes.class)
     private String username;
 
     @Column(length = 512)
@@ -36,6 +36,21 @@ public class Account {
 
     @Setter
     private String role; // ProjectOwner, ProjectMember ,Investor, Moderator, Admin
+
+    @Getter
+    private double investedSum;
+
+    @Getter
+    @Setter
+    String about;
+
+    @Getter
+    @Setter
+    String userImage;
+
+    public void addInvestedSum(double amount){
+        investedSum += amount;
+    }
 
     public Account(String username, String password, String email, String role) {
         this.username = username;

@@ -1,6 +1,8 @@
 package com.model;
 
 import com.entities.Project;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectData {
+    static ObjectMapper mapper = new ObjectMapper();
+
     private String name;
     private String description;
     private String owner;
@@ -28,5 +32,24 @@ public class ProjectData {
         this.targetSum = project.getTargetSum();
         this.creationDate = project.getCreationDate();
         this.targetDate = project.getTargetDate();
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return "ProjectData{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", owner='" + owner + '\'' +
+                ", investedSum=" + investedSum +
+                ", targetSum=" + targetSum +
+                ", creationDate='" + creationDate + '\'' +
+                ", targetDate='" + targetDate + '\'' +
+                '}';
     }
 }
