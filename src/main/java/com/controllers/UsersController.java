@@ -46,7 +46,8 @@ public class InvestorsController {
     ResponseEntity getInvestors(
             @RequestParam(required = false) Optional<Integer> top,
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "10") int fetchingAmount){
+            @RequestParam(required = false, defaultValue = "10") int fetchingAmount,
+            @RequestParam(required = false) Optional<String> role){
         if(top.isPresent()){
             List<Account> accounts = accountRepository.findTopByInvestedSum(1000);
             return getPageForListOfAccounts(page, fetchingAmount, accounts);
