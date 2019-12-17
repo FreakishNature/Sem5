@@ -84,12 +84,12 @@ public class ProjectMembersController {
             }
         }
 
-
-        if(!projectMembersRepository.findByProjectIdAndMemberId(
+        Optional<ProjectMember> projectMember = projectMembersRepository.findByProjectIdAndMemberId(
                 project.get().getId(),
-                account.get().getId()).isPresent() &&
-                !account.get().getRole().equals(Authorities.ADMIN) &&
-                !account.get().getRole().equals(Authorities.MODERATOR)){
+                account.get().getId());
+
+        if((!projectMember.isPresent() || !projectMember.get().getStatus().equals(Status.ACCEPTED)) &&
+                !userHasAccessToViewStatus){
             return responseWithLogs(
                     new ResponseEntity<>(
                             new ErrorResponse("You do not have permissions to view members of this project."),
@@ -97,6 +97,7 @@ public class ProjectMembersController {
                     )
             );
         }
+
 
         List<ProjectMember> projectMembers = !status.isPresent() && userHasAccessToViewStatus? projectMembersRepository.findAllByProjectId(project.get().getId())
                 : projectMembersRepository.findAllByProjectIdAndStatus(project.get().getId(),status.get());
@@ -112,6 +113,8 @@ public class ProjectMembersController {
                                 searchedAccount.getUsername(),
                                 searchedAccount.getRole(),
                                 member.getInvestedSum(),
+                                member.getMembershipScope(),
+                                searchedAccount.getUserImage(),
                                 member.getStatus()
                         )
                 );
@@ -120,7 +123,9 @@ public class ProjectMembersController {
                         new ProjectMemberData(
                                 searchedAccount.getUsername(),
                                 searchedAccount.getRole(),
-                                member.getInvestedSum()
+                                member.getInvestedSum(),
+                                member.getMembershipScope(),
+                                searchedAccount.getUserImage()
                         )
                 );
             }
@@ -144,6 +149,13 @@ public class ProjectMembersController {
                                                       @RequestBody JoiningRequest joiningRequest){
         log.info("POST /projects/" + projectName + "/members/join request body : " + JsonUtils.toJsonString(joiningRequest));
 
+        if(joiningRequest.getMembershipScope() == null || joiningRequest.getMembershipScope().isEmpty()){
+            return responseWithLogs(
+                    new ResponseEntity<>(ErrorResponse.errorResponseWithMissingField("membershipScope"),
+                    HttpStatus.BAD_REQUEST)
+            );
+        }
+
         String username = auth.getPrincipal().toString();
         Optional<Account> account = accountRepository.findFirstByUsername(username);
         Optional<Project> project = projectRepository.findByName(projectName);
@@ -152,24 +164,41 @@ public class ProjectMembersController {
             return responseWithLogs(ProjectsController.errorIfProjectNotFound(projectName));
         }
 
+        if(project.get().getOwner().equals(account.get().getUsername())){
+            return responseWithLogs(
+                    new ResponseEntity<>(
+                            new ErrorResponse("You are already member of this project as its owner"),
+                            HttpStatus.CONFLICT
+                    )
+            );
+        }
+
         Optional<ProjectMember> projectMember = projectMembersRepository.findById(account.get().getId());
 
-        if(projectMember.isPresent()){
-            if(projectMember.get().getStatus().equals(Status.REJECTED)){
-                return responseWithLogs(
-                        new ResponseEntity<>(
-                                new ErrorResponse("You are not allowed to join this project as its member," +
-                                        " but you still can be an investor of this project"),
-                                HttpStatus.CONFLICT
-                        )
-                );
-            }else {
-                return responseWithLogs(
-                        new ResponseEntity<>(
-                                new ErrorResponse("You are already member of this project"),
-                                HttpStatus.CONFLICT
-                        )
-                );
+        if(projectMember.isPresent()) {
+            switch (projectMember.get().getStatus()) {
+                case Status.REJECTED:
+                    return responseWithLogs(
+                            new ResponseEntity<>(
+                                    new ErrorResponse("You are not allowed to join this project as its member," +
+                                            " but you still can be an investor of this project"),
+                                    HttpStatus.CONFLICT
+                            )
+                    );
+                case Status.ACCEPTED:
+                    return responseWithLogs(
+                            new ResponseEntity<>(
+                                    new ErrorResponse("You are already member of this project"),
+                                    HttpStatus.CONFLICT
+                            )
+                    );
+                case Status.PENDING:
+                    return responseWithLogs(
+                            new ResponseEntity<>(
+                                    new ErrorResponse("Your already made a request to this project, please wait until your request will reviewed"),
+                                    HttpStatus.CONFLICT
+                            )
+                    );
             }
         }
 

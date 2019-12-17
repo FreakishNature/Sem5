@@ -1,9 +1,9 @@
 package com.entities;
 
 
+import com.Application;
 import com.security.Authorities;
 import com.security.converters.CryptoConverterAes;
-import com.security.converters.CryptoConverterShaRsa;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,14 +28,16 @@ public class Account {
 
     @Column(length = 512)
     @Convert(converter = CryptoConverterAes.class)
+    @Setter
     private String password;
 
     @Column(length = 512)
     @Convert(converter = CryptoConverterAes.class)
+    @Setter
     private String email;
 
     @Setter
-    private String role; // ProjectOwner, ProjectMember ,Investor, Moderator, Admin
+    private String role = Authorities.PROJECT_MEMBER; // ProjectOwner, ProjectMember ,Investor, Moderator, Admin
 
     @Getter
     private double investedSum;
@@ -46,7 +48,11 @@ public class Account {
 
     @Getter
     @Setter
-    String userImage;
+    String userImage = Application.constants.DEFAULT_IMAGE;
+
+    @Getter
+    @Setter
+    boolean isPublicInvestor = true;
 
     public void addInvestedSum(double amount){
         investedSum += amount;

@@ -20,11 +20,11 @@ public class ProjectData {
     private String owner;
     private double investedSum;
     private double targetSum;
-
+    private String category;
     private String creationDate;
     private String targetDate;
 
-    public ProjectData(Project project) {
+    public ProjectData(Project project,String category) {
         this.name = project.getName();
         this.description = project.getDescription();
         this.owner = project.getOwner();
@@ -32,6 +32,7 @@ public class ProjectData {
         this.targetSum = project.getTargetSum();
         this.creationDate = project.getCreationDate();
         this.targetDate = project.getTargetDate();
+        this.category = category;
     }
 
     @Override

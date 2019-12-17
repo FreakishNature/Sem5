@@ -10,6 +10,7 @@ import com.security.UserPrincipal;
 import com.response.ErrorResponse;
 import com.security.JwtProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,10 +20,15 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
@@ -37,13 +43,13 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private void unauthorizedError(HttpServletResponse response){
-        try {
+//        try {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setHeader("Content-Type","application/json");
-            response.getOutputStream().write(mapper.writeValueAsBytes(new ErrorResponse("Unauthorized.")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//            response.setHeader("Content-Type","application/json");
+//            response.getOutputStream().write(mapper.writeValueAsBytes(new ErrorResponse("Unauthorized.")));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -52,7 +58,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String header = request.getHeader(JwtProperties.HEADER_STRING);
 
         // If header does not contain BEARER or is null delegate to Spring impl and exit
-        if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
+        if ((header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) &&
+                (   request.getCookies() == null ||
+                    Arrays.stream(request.getCookies())
+                            .filter(cookie -> cookie.getName()
+                                    .equals(HttpHeaders.AUTHORIZATION)
+                            )
+                            .collect(Collectors.toList()).isEmpty()
+            )) {
 //            unauthorizedError(response);
             chain.doFilter(request, response);
             return;
@@ -61,6 +74,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // If header is present, try grab user principal from database and perform authorization
         Optional<Authentication> authentication = getUsernamePasswordAuthentication(request,response);
         if(!authentication.isPresent()){
+            chain.doFilter(request, response);
             return;
         }
         SecurityContextHolder.getContext().setAuthentication(authentication.get());
@@ -69,16 +83,28 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         chain.doFilter(request, response);
     }
 
-    private Optional<Authentication> getUsernamePasswordAuthentication(HttpServletRequest request,HttpServletResponse response) {
-        String token = request.getHeader(JwtProperties.HEADER_STRING)
-                .replace(JwtProperties.TOKEN_PREFIX + " ","");
+    private Optional<Authentication> getUsernamePasswordAuthentication(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+        Optional<String> token = Optional.empty();
+        if(request.getCookies() != null){
+            for(Cookie cookie  : request.getCookies()){
+                if(cookie.getName().equals(HttpHeaders.AUTHORIZATION)){
+                    token = Optional.of(URLDecoder.decode(cookie.getValue(),"UTF-8")
+                            .replace(JwtProperties.TOKEN_PREFIX + " ",""));
+                }
+            }
+        }
+
+        if(!token.isPresent()){
+            token = Optional.of(request.getHeader(JwtProperties.HEADER_STRING)
+                    .replace(JwtProperties.TOKEN_PREFIX + " ",""));
+        }
 
         // parse the token and validate it
         try {
             String userName = JWT.require(HMAC512(JwtProperties.SECRET.getBytes()))
                     .acceptExpiresAt(JwtProperties.EXPIRATION_TIME)
                     .build()
-                    .verify(token)
+                    .verify(token.get())
                     .getSubject();
 
             // Search in the DB if we find the user by token subject (username)

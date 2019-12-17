@@ -1,5 +1,6 @@
 package com;
 
+import com.constants.Constants;
 import com.database.ProjectRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 //@EnableJpaRepositories(basePackageClasses = ProjectRepository.class)
 public class Application {
+    public static Constants constants = new Constants();
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class,args);
     }
@@ -23,7 +26,8 @@ public class Application {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE","PATCH")
                         .allowedOrigins("*")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }

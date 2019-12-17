@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -61,21 +62,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // add jwt jsonFilters (1. authentication, 2. authorization)
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(),this.accountRepository))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.accountRepository))
+
                 .authorizeRequests()
                 // configure access rules
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/register").permitAll()
-                .antMatchers(HttpMethod.GET, "/investors").permitAll()
                 .antMatchers(HttpMethod.GET, "/projects").permitAll()
                 .antMatchers(HttpMethod.GET, "/projects/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/file/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/projects/*/role").permitAll()
                 .antMatchers(HttpMethod.POST, "/projects")
                 .hasAnyRole(Authorities.ADMIN,Authorities.PROJECT_OWNER)
-//                .antMatchers(HttpMethod.POST, "/projects/{ownerName}")
-//                .hasAnyRole("ADMIN","PROJECT_OWNER")
-
-//                .antMatchers("/api/public/management/*").hasRole("MANAGER")
-//                .antMatchers("/api/public/admin/*").hasRole("ADMIN")
                 .anyRequest().authenticated().and().cors();
+    }
+
+    @Override
+    public void configure(WebSecurity web){
+
+        web.ignoring().antMatchers(HttpMethod.GET,"/users/**")
+        .and()
+        .ignoring().antMatchers(HttpMethod.GET,"/projects/categories")
+        .and()
+        .ignoring().antMatchers(HttpMethod.GET,"/file/**");
+
     }
 
     @Bean
@@ -86,6 +95,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return daoAuthenticationProvider;
     }
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

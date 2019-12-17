@@ -1,244 +1,151 @@
-INFO http-nio-8081-exec-3 com.controllers.HomeController - Hello endpoint : test bla
-INFO http-nio-8081-exec-3 com.controllers.HomeController - Hello endpoint : dsad sdada
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : null
-INFO http-nio-8081-exec-2 com.controllers.HomeController - Hello endpoint : null
-INFO http-nio-8081-exec-1 com.controllers.HomeController - Hello endpoint : null
-INFO http-nio-8081-exec-2 com.controllers.HomeController - Hello endpoint : CREATE,READ,DELETE,EDIT,PARTICIPATE
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-5 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-2 com.security.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-2 com.security.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-9 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-10 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-1 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-8 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-4 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFailureHandler - Full authentication is required to access this resource
-INFO http-nio-8081-exec-7 com.controllers.HomeController - Hello endpoint : somuse 12312
-INFO http-nio-8081-exec-5 com.controllers.HomeController - Hello endpoint : ADMIN,PROJECT_OWNER
-INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : admin
+INFO http-nio-8081-exec-10 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-10 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@2ad4299a, com.model.ProjectMemberData@25355118, com.model.ProjectMemberData@d5ce5dd, com.model.ProjectMemberData@443d1162],[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@6ecc1b9,[]>
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@6f223ebd, com.model.ProjectMemberData@2f374967, com.model.ProjectMemberData@1d886d97, com.model.ProjectMemberData@7b2dd23],[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@800af4a,[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@52da23a, com.model.ProjectMemberData@a0e2e39, com.model.ProjectMemberData@5f096e49, com.model.ProjectMemberData@2138c527],[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@5730a3b3,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@3304274f, com.model.ProjectMemberData@36054cb4, com.model.ProjectMemberData@29278fd6, com.model.ProjectMemberData@21d645f6],[]>
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@6619100d,[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@1cd8921a, com.model.ProjectMemberData@781dec00, com.model.ProjectMemberData@70e9893f, com.model.ProjectMemberData@4c61fda4],[]>
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@65ba521e,[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@5b4752de, com.model.ProjectMemberData@219cfa3, com.model.ProjectMemberData@77365231, com.model.ProjectMemberData@6cd6c4d0],[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@2c9465b7,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@507cc38c, com.model.ProjectMemberData@342ce655, com.model.ProjectMemberData@222cf04a, com.model.ProjectMemberData@7661cbac],[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@53ac0643,[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@19f31236, com.model.ProjectMemberData@56a5c01b, com.model.ProjectMemberData@6eccf619, com.model.ProjectMemberData@76d4fcdd],[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@135db2cd,[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-7 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@3777e018, com.model.ProjectMemberData@31dfb213, com.model.ProjectMemberData@1b4590e9, com.model.ProjectMemberData@6bb22640],[]>
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@2811e4a1,[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@6fc1295c, com.model.ProjectMemberData@6755e536, com.model.ProjectMemberData@7133cfbf, com.model.ProjectMemberData@a121601],[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=REJECTED
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@42cfdc95,[]>
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@20aaf46d, com.model.ProjectMemberData@4b6c7a04, com.model.ProjectMemberData@831dab3, com.model.ProjectMemberData@4aa23e53],[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=REJECTED
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=REJECTED
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=REJECTED
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=REJECTED
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember?status?=REJECTED
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember?status?=REJECTED
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@6f7993bd,[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":1000.0,"targetSum":5000.0,"category":"Animals","creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-8 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@7734bdc4, com.model.ProjectMemberData@1366e3e5, com.model.ProjectMemberData@5633b382, com.model.ProjectMemberData@26924411],[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember2?status?=ACCEPTED
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@7d5aa8a0,[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-5 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@6da52975, com.model.ProjectMemberData@50d7aa0c, com.model.ProjectMemberData@6cc329c7, com.model.ProjectMemberData@3ce5f3ad],[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember?status?=ACCEPTED
+INFO http-nio-8081-exec-6 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@12fe262f,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-2 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@42fe1aa3, com.model.ProjectMemberData@14c057d5, com.model.ProjectMemberData@2859af97, com.model.ProjectMemberData@212a636f],[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember?status?=REJECTED
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@2a6c893,[]>
+INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@7141ea9f, com.model.ProjectMemberData@5dc7d94b, com.model.ProjectMemberData@25124a4b, com.model.ProjectMemberData@30e98cbb],[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/realproj endpoint
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/realproj/role
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@713a1c60,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,{"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":3000.0,"targetSum":15000.0,"category":"Competition","creationDate":"2019-11-19","targetDate":"2021-01-01"},[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@6d5c098d,[]>
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,{"name":"Greatest project ever","description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","owner":"abcd","investedSum":13000.0,"targetSum":10000.5,"category":"Memorial","creationDate":"2019-11-19","targetDate":"2020-01-01"},[]>
+INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : abcd
 INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDAxOTY3OX0.RCGOQzqrGzq5Aaj_doDhwXnT6I8UnClwNsI5bn_ceLXToG5FQYjhyNOMJxff0Un6fVblHRtYtcg8tRx9wODwfA
-INFO http-nio-8081-exec-9 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : abcd
-INFO http-nio-8081-exec-9 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-9 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkIiwiZXhwIjoxNTc0MDE5Nzc4fQ.XNPKiwzBCG6vLtMkNv25bkIrbeNS5xLQbTftxVechwWTgeXEuJDyQ8SZl8r-xV1t-007W_t0r7LQICdmiu9T8Q
-INFO http-nio-8081-exec-1 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : abcd
-INFO http-nio-8081-exec-5 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : abcd
-INFO http-nio-8081-exec-5 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-5 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkIiwiZXhwIjoxNTc0MDE5ODk3fQ.kfUk3cG2PsPV-Bs4yLMpyI1zkRvowOP-0e5yNdbwyfqDC3BjH6INTiqJX60Ml8hy9Udhc49vXrUNx_K0LF-udQ
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"myproj","description":"this is my proj","owner":null,"investedSum":0.0,"targetSum":10000.5,"creationDate":null,"targetDate":"2020-01-01","status":"PENDING"}
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"myproj","description":"this is my proj","owner":null,"investedSum":0.0,"targetSum":10000.5,"creationDate":null,"targetDate":"2020-01-01","status":"PENDING"}
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : admin
-INFO http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDAyMDE2NX0.S2Prk5RQgeXBt2rQNaS_m-izLDGGu0E-BVd6EAugsY6KVFIrTQwFrREugaKiqg8QMUTa2794TgVqOlhduvuKmw
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/myproj?investingSum=1000.0
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <202 ACCEPTED Accepted,[]>
-INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : admin
-INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDAyMDMyOH0.jhFAdY5KtD1sVwcn4oWcK6zcrLy04p88qxHwl_e4WJKupCbK8aA1VrOpX8kkOw5Xu8Vsr30DscZvy1L_GzsiwQ
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"myproj","description":"this is my proj","owner":null,"investedSum":0.0,"targetSum":10000.5,"creationDate":null,"targetDate":"2020-01-01","status":"PENDING"}
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/myproj?investingSum=1000.0
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <202 ACCEPTED Accepted,[]>
-INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : abcd
-INFO http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-3 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkIiwiZXhwIjoxNTc0MTU0MzczfQ.PLvjvTRnv-CAORjdKgDnSod42iypa5JYu2qJkSRq8ZkrsFny1qXw4j_4apD5xgthvhqrMPDXoZ1X43MJ2iyNlQ
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"myproj","description":"this is my proj","owner":null,"investedSum":0.0,"targetSum":10000.5,"creationDate":null,"targetDate":"2020-01-01","status":"PENDING"}
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@6ae2876f],[]>
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFilter - Trying to get token for user : admin
-INFO http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFilter - Token has been generated successfully
-DEBUG http-nio-8081-exec-2 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU3NDE1NDU5M30.deYCT6JRCxAa8rT-vucMQ4sTy_YV8y3lahJpmVBXhjq2gTVeLd2DGgP9L273xuMUvr47cm8MHKDlNNr_jTyElQ
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[Project(id=1, name=myproj, description=this is my proj, owner=abcd, investedSum=0.0, targetSum=10000.5, creationDate=null, targetDate=2020-01-01, status=PENDING)],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[Project(id=1, name=myproj, description=this is my proj, owner=abcd, investedSum=0.0, targetSum=10000.5, creationDate=null, targetDate=2020-01-01, status=PENDING)],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=myproj, description=this is my proj, owner=abcd, investedSum=0.0, targetSum=10000.5, creationDate=null, targetDate=2020-01-01, status=PENDING),[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/myproj/status?status=Optional[ACCEPTED] endpoint.
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/myproj/status?status=Optional[ACCEPTED] endpoint.
-DEBUG http-nio-8081-exec-2 com.controllers.ProjectsController - Project myproj status has been updated.
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"realproj","description":"I want to create app with","owner":null,"investedSum":0.0,"targetSum":15000.0,"creationDate":null,"targetDate":"2021-01-01","status":"PENDING"}
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/realproj/status?status=Optional[ACCEPTED] endpoint.
-DEBUG http-nio-8081-exec-1 com.controllers.ProjectsController - Project realproj status has been updated.
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint POST /projects endpoint with request body : {"id":null,"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":null,"investedSum":0.0,"targetSum":5000.0,"creationDate":null,"targetDate":"2020-06-01","status":"PENDING"}
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <201 CREATED Created,[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/i beleave/status?status=Optional[ACCEPTED] endpoint.
-DEBUG http-nio-8081-exec-7 com.controllers.ProjectsController - Project i beleave status has been updated.
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@7aeab071, com.model.ProjectData@4fc79dfd, com.model.ProjectData@64b84546],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@da8db68, com.model.ProjectData@b3e7ed7, com.model.ProjectData@69896a1],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@3368d520, com.model.ProjectData@24f7bf1f, com.model.ProjectData@58930523],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@4c7910a9, com.model.ProjectData@66d81764, com.model.ProjectData@3608dd89],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@4972ce52, com.model.ProjectData@10aa08be, com.model.ProjectData@61c1c54a],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@194bbc0a, com.model.ProjectData@628fb6f0, com.model.ProjectData@488fb3a],[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@2bf4a961, com.model.ProjectData@4ccb5797, com.model.ProjectData@653aa490],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@31cd9277, com.model.ProjectData@39e87861, com.model.ProjectData@26eaca8d],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@614e3f48, com.model.ProjectData@155c3f9f, com.model.ProjectData@478c4793],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@188d6985, com.model.ProjectData@2ffbb641, com.model.ProjectData@7e05d9f8],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@74b3b175, com.model.ProjectData@2f404b64, com.model.ProjectData@4421e528],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5bc1a4b1, com.model.ProjectData@49d54a88, com.model.ProjectData@14b9a5e0],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@640f2d71, com.model.ProjectData@4e067791, com.model.ProjectData@1285fa0f],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@39669a91, com.model.ProjectData@42f8cd39, com.model.ProjectData@68ac9379],[]>
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@7d529d0a, com.model.ProjectData@5ec44f7e, com.model.ProjectData@37d8fa41],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@606a560f, com.model.ProjectData@3ffd83d9, com.model.ProjectData@6b194ee2],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1422a5, com.model.ProjectData@24787b51, com.model.ProjectData@587ea1cf],[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@43cbfefe, com.model.ProjectData@72d66cb9, com.model.ProjectData@51a8c8d8],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@2d030f37, com.model.ProjectData@1b7e8a2b, com.model.ProjectData@7e4ad4d8],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@50dcaaa3, com.model.ProjectData@187463cc, com.model.ProjectData@3b4c36ce],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@32359572, com.model.ProjectData@7fa1d9ec, com.model.ProjectData@21fb03b6],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@44cdeade, com.model.ProjectData@47ffab26, com.model.ProjectData@73f5d03a],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@51e180c, com.model.ProjectData@1123a75e, com.model.ProjectData@7c546013],[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@47896023, com.model.ProjectData@5ab6c107, com.model.ProjectData@59367818],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1c4fa02, com.model.ProjectData@76750117, com.model.ProjectData@5a9fc761],[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@4e3d5af1, com.model.ProjectData@2c7590ba, com.model.ProjectData@58a64e86],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@29f57366, com.model.ProjectData@255a583b, com.model.ProjectData@417c00c1],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@3d734383, com.model.ProjectData@31bb7878, com.model.ProjectData@3ff04efa],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1918e7f, com.model.ProjectData@100335f4, com.model.ProjectData@18b27421],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@78a84954, com.model.ProjectData@77a6c821, com.model.ProjectData@602f668b],[]>
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1a709a84, com.model.ProjectData@39649bb1, com.model.ProjectData@455532a8],[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@470b66c5, com.model.ProjectData@52abc81b, com.model.ProjectData@3ef0c1bc],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@12ba0599, com.model.ProjectData@6483bad6, com.model.ProjectData@69c397ed],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@44d0f26a, com.model.ProjectData@55d0d1b2, com.model.ProjectData@12d88b88],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@6715b4c8, com.model.ProjectData@affa9b5, com.model.ProjectData@27186b20],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5c64039b, com.model.ProjectData@77f4cea, com.model.ProjectData@2e55b1c0],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1b855987, com.model.ProjectData@2eae898c, com.model.ProjectData@7e9c74e4],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@4496242d, com.model.ProjectData@6abc11a, com.model.ProjectData@72d9bd78],[]>
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@3b5e6e61, com.model.ProjectData@128c3b89, com.model.ProjectData@ec7fc6f],[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@c76e4be, com.model.ProjectData@2a0b6bd6, com.model.ProjectData@26dd99f6],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5673f4a4, com.model.ProjectData@4c9f752, com.model.ProjectData@2b2118da],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1f94ce7a, com.model.ProjectData@6d293693, com.model.ProjectData@1ce7c457],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@3ca2c846, com.model.ProjectData@503e7edb, com.model.ProjectData@6acddae0],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@53d570fb, com.model.ProjectData@3758958f, com.model.ProjectData@43ded909],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@11c25876, com.model.ProjectData@3f26e4ed, com.model.ProjectData@45105627],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@594915e2, com.model.ProjectData@4178596f, com.model.ProjectData@645919ba],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@1f4376bf, com.model.ProjectData@290ebeea, com.model.ProjectData@398a5d7d],[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@65061d1f, com.model.ProjectData@1ad68aa5, com.model.ProjectData@4fac4ed0],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5c21d635, com.model.ProjectData@41159453, com.model.ProjectData@1c51a0f2],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@58f6ee2d, com.model.ProjectData@190b0bc4, com.model.ProjectData@2f763154],[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5312a0dc, com.model.ProjectData@3c01faaa, com.model.ProjectData@1291406c],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@301f992f, com.model.ProjectData@7f31afe7, com.model.ProjectData@38fb32d2],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@183cf56f, com.model.ProjectData@7073122, com.model.ProjectData@906f2f4],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@560862cc, com.model.ProjectData@627b5875, com.model.ProjectData@d557955],[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@6f69ffb7, com.model.ProjectData@271fd0e1, com.model.ProjectData@52cc9cc2],[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@3b03c49e, com.model.ProjectData@6a4e5730, com.model.ProjectData@aadbcb1],[]>
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@4ee099f8, com.model.ProjectData@2cb2fd6e, com.model.ProjectData@32f052],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@99bf9c3, com.model.ProjectData@229cfc6d, com.model.ProjectData@72795924],[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@58c90cc7, com.model.ProjectData@7f6e87ae, com.model.ProjectData@330b7260],[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@68806b29, com.model.ProjectData@5291155d, com.model.ProjectData@44166a74],[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@7c660164, com.model.ProjectData@20c5e97b, com.model.ProjectData@4bc2288c],[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[com.model.ProjectData@5760eba7, com.model.ProjectData@1f615b77, com.model.ProjectData@4519c41b],[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/dasd endpoint
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Project with project name dasd does not exists.
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <404 NOT_FOUND Not Found,com.response.ErrorResponse@f55afb3,[]>
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-4 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@3472bffc,[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@4878f7e0,[]>
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@20ea6a6f,[]>
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-8 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@1f553bf5,[]>
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-9 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@7859d3d4,[]>
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-10 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@5234ffac,[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@626beba1,[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@37315d99,[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@72d7bee4,[]>
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-5 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.ProjectData@6b7ba538,[]>
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,{"name":"myproj","description":"this is my proj","owner":"abcd","investedSum":0.0,"targetSum":10000.5,"creationDate":"2019-11-19","targetDate":"2020-01-01"},[]>
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-2 com.controllers.ProjectsController - Has been returned response : <200 OK OK,{"name":"myproj","description":"this is my proj","owner":"abcd","investedSum":0.0,"targetSum":10000.5,"creationDate":"2019-11-19","targetDate":"2020-01-01"},[]>
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been called endpoint GET /projects/myproj endpoint
-INFO http-nio-8081-exec-3 com.controllers.ProjectsController - Has been returned response : <200 OK OK,{"name":"myproj","description":"this is my proj","owner":"abcd","investedSum":0.0,"targetSum":10000.5,"creationDate":"2019-11-19","targetDate":"2020-01-01"},[]>
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been called endpoint GET /projects?status=Optional.empty
-INFO http-nio-8081-exec-6 com.controllers.ProjectsController - Has been returned response : <200 OK OK,[{"name":"myproj","description":"this is my proj","owner":"abcd","investedSum":0.0,"targetSum":10000.5,"creationDate":"2019-11-19","targetDate":"2020-01-01"}, {"name":"realproj","description":"I want to create app with","owner":"abcd","investedSum":0.0,"targetSum":15000.0,"creationDate":"2019-11-19","targetDate":"2021-01-01"}, {"name":"i beleave","description":"I beleave app is a wonderful app which bla bla bla","owner":"abcd","investedSum":0.0,"targetSum":5000.0,"creationDate":"2019-11-19","targetDate":"2020-06-01"}],[]>
+DEBUG http-nio-8081-exec-4 com.security.auth.JwtAuthenticationFilter - Generated token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkIiwiZXhwIjoxNTc2NTcyMTE2fQ.sknTsgl_jnUFCOiB2zl8LuPsyD0C4EZU159sTDKDdmao3rlMoKxTXt3-UyMSOajnD-mnAnN_TGsNPbegy_0hZA
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@6bd649bd,[]>
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-3 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@24579621, com.model.ProjectMemberData@3422525d, com.model.ProjectMemberData@68be37e4, com.model.ProjectMemberData@4c7eeb4c],[]>
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been called endpoint PATCH /projects/greatest project ever/members/projectMember?status?=ACCEPTED
+INFO http-nio-8081-exec-4 com.controllers.ProjectMembersController - Has been returned response : <202 ACCEPTED Accepted,[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been called endpoint PATCH /projects/greatest project ever/role
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been called endpoint GET /projects/greatest project ever endpoint
+INFO http-nio-8081-exec-1 com.controllers.ProjectsController - Has been returned response : <200 OK OK,Project(id=1, name=Greatest project ever, description=Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum., categoryId=2, owner=abcd, investedSum=13000.0, targetSum=10000.5, creationDate=2019-11-19, targetDate=2020-01-01, status=PENDING),[]>
+INFO http-nio-8081-exec-7 com.controllers.ProjectsController - Has been returned response : <200 OK OK,com.model.RoleResponse@1c47280f,[]>
+INFO http-nio-8081-exec-10 com.controllers.ProjectMembersController - GET /projects/greatest project ever/members
+INFO http-nio-8081-exec-10 com.controllers.ProjectMembersController - Has been returned response : <200 OK OK,[com.model.ProjectMemberData@5f554f91, com.model.ProjectMemberData@14ee0861, com.model.ProjectMemberData@168cc748, com.model.ProjectMemberData@45c2bcf9],[]>

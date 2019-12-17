@@ -1,10 +1,16 @@
 package com.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class Categories {
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "Categories")
+@Getter
+@NoArgsConstructor
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

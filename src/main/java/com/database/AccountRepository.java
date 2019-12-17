@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account,Long> {
     Optional<Account> findFirstByEmail(String email);
     Optional<Account> findFirstByUsername(String username);
-    List<Account> findTopByInvestedSum(double investedSum);
+    List<Account> findAllByRole(String role);
+//    List<Account> findTopByInvestedSum(double investedSum);
+//    List<Account> findTopNByInvestedSum(int top);
 }

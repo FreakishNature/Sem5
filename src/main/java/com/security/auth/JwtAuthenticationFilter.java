@@ -9,6 +9,7 @@ import com.security.UserPrincipal;
 import com.response.ErrorResponse;
 import com.security.JwtProperties;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,9 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Optional;
 
@@ -98,15 +101,21 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
+        Date expiresAt = new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME);
         String token = JWT.create()
                 .withSubject(principal.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
+                .withExpiresAt(expiresAt)
                 .sign(HMAC512(JwtProperties.SECRET.getBytes()));
 
         log.info("Token has been generated successfully");
         log.debug("Generated token : " + token);
         // Add token in response
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " +  token);
+        Cookie cookie = new Cookie(HttpHeaders.AUTHORIZATION,
+                URLEncoder.encode(JwtProperties.TOKEN_PREFIX + " " + token,"UTF-8"));
+
+        response.getOutputStream().write(mapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(new Token(token,expiresAt.getTime())));
+        response.addCookie(cookie);
+        //        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + " " +  token);
     }
 
 

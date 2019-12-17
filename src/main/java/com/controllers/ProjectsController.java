@@ -1,9 +1,11 @@
 package com.controllers;
 
 import com.database.AccountRepository;
+import com.database.CategoryRepository;
 import com.database.ProjectMembersRepository;
 import com.database.ProjectRepository;
 import com.entities.Account;
+import com.entities.Category;
 import com.entities.Project;
 import com.entities.ProjectMember;
 import com.model.*;
@@ -18,8 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // Create validations for all request bodies and set all fields which should not be putted to null
@@ -38,13 +39,31 @@ public class ProjectsController {
     private final
     ProjectMembersRepository projectMembersRepository;
 
+    private final CategoryRepository categoryRepository;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+    Map<Long,String> categoriesMap;
+
+    public String getCategory(long id){
+        if(categoriesMap == null){
+            categoriesMap = new HashMap<>();
+            List<Category> categories = categoryRepository.findAll();
+
+            for(Category category : categories){
+                categoriesMap.put(category.getId(),category.getCategory());
+            }
+
+        }
+        return categoriesMap.get(id);
+    }
+
     @Autowired
-    public ProjectsController(ProjectRepository projectRepository, AccountRepository accountRepository, ProjectMembersRepository projectMembersRepository) {
+    public ProjectsController(ProjectRepository projectRepository, AccountRepository accountRepository, ProjectMembersRepository projectMembersRepository, CategoryRepository categoryRepository) {
         this.projectRepository = projectRepository;
         this.accountRepository = accountRepository;
         this.projectMembersRepository = projectMembersRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -174,7 +193,10 @@ public class ProjectsController {
             }
         }
 
-        return responseWithLogs(new ResponseEntity<>(new ProjectData(project.get()), HttpStatus.OK));
+        return responseWithLogs(new ResponseEntity<>(new ProjectData(
+                project.get(),
+                getCategory(project.get().getCategoryId())
+        ), HttpStatus.OK));
     }
 
     /*
@@ -266,7 +288,10 @@ public class ProjectsController {
                         projectRepository.findAll()
                                 .stream()
                                 .filter(p -> p.getStatus().equals(Status.ACCEPTED))
-                                .map(ProjectData::new)
+                                .map( p -> new ProjectData(
+                                        p,
+                                        getCategory(p.getCategoryId()))
+                                )
                                 .collect(Collectors.toList()),
                         HttpStatus.OK
                 )
@@ -349,7 +374,10 @@ public class ProjectsController {
                 new ResponseEntity<>(
                         projectRepository.findAllByOwner(ownerName)
                                 .stream()
-                                .map(ProjectData::new)
+                                .map( p -> new ProjectData(
+                                        p,
+                                        getCategory(p.getCategoryId()))
+                                )
                                 .collect(Collectors.toList()),
                         HttpStatus.OK
                 )
@@ -490,6 +518,68 @@ public class ProjectsController {
         }
 
         return responseWithLogs(new ResponseEntity<>(HttpStatus.ACCEPTED));
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity getAllCategories(){
+        callingEndpointLog("Get /categories");
+
+        return responseWithLogs(new ResponseEntity<>(
+                categoryRepository.findAll()
+                        .stream()
+                        .map(Category::getCategory)
+                        .collect(Collectors.toList()),
+                HttpStatus.OK)
+        );
+    }
+
+    @GetMapping("/{projectName}/role")
+    public ResponseEntity getProjectRole(
+            Authentication auth,
+            @PathVariable String projectName
+    ){
+        callingEndpointLog("PATCH /projects/" + projectName + "/role");
+
+        Optional<Project> project = projectRepository.findByName(projectName);
+        if(!project.isPresent()){
+            return errorIfProjectNotFound(projectName);
+        }
+
+        if(auth == null){
+            return responseWithLogs(new ResponseEntity<>(
+                    new RoleResponse(RoleResponse.Roles.VIEWER)
+                    ,HttpStatus.OK
+            ));
+        }
+
+        String username = auth.getPrincipal().toString();
+        Account account = accountRepository.findFirstByUsername(username).get();
+
+        if(account.getRole().equals(Authorities.MODERATOR) ||
+            account.getRole().equals(Authorities.ADMIN) ||
+            account.getUsername().equals(project.get().getOwner())){
+            return responseWithLogs(new ResponseEntity<>(
+                    new RoleResponse(RoleResponse.Roles.ADMIN)
+                    ,HttpStatus.OK
+            ));
+        }
+
+        Optional<ProjectMember> member = projectMembersRepository.findByProjectIdAndMemberId(
+                project.get().getId(),
+                account.getId()
+        );
+
+        if(member.isPresent()){
+            return responseWithLogs(new ResponseEntity<>(
+                    new RoleResponse(RoleResponse.Roles.MEMBER)
+                    ,HttpStatus.OK
+            ));
+        }
+
+        return responseWithLogs(new ResponseEntity<>(
+                new RoleResponse(RoleResponse.Roles.VIEWER)
+                ,HttpStatus.OK
+        ));
     }
 
     static ResponseEntity<ErrorResponse> errorIfProjectNotFound(String projectName){
