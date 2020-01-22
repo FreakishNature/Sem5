@@ -54,6 +54,10 @@ public class Account {
     @Setter
     boolean isPublicInvestor = true;
 
+    @Getter
+    @Setter
+    boolean enabled = false;
+
     public void addInvestedSum(double amount){
         investedSum += amount;
     }
